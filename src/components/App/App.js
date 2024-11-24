@@ -1,206 +1,64 @@
 import './app.scss';
-import products from '../../data';
+import Tittle from '../Title/Title';
+import CartBox from '../CartBox/CartBox';
+import Total from '../Total/Total';
+import products from './../../data';
+import Wrapper from '../Wrapper/Wrapper';
+import ListBox from '../ListBox/ListBox';
+import Product from '../Product/Product';
+import { useState } from 'react';
 
 function App() {
+    const [items, setItems] = useState(products);
+    const [cart, setCart] = useState([]);
+    const [num, setNum] = useState(1);
+
+    function handleAddNum(id) {
+        setItems((items) => {
+            return items.map((item) => {
+                if (item.id === id) {
+                    return {
+                        ...item,
+                        num: item.num + 1,
+                        quantity: item.quantity - 1,
+                    };
+                }
+                return item;
+            });
+        });
+    }
+
     return (
         <div className="container">
             <div className="cart">
-                <h1 className="cart__title">React Shopping-cart</h1>
-                <div className="cart__box">
-                    <div className="cart__left-wrapper wrapper">
-                        <ul className="cart__list list-box">
-                            <li className="list-box__items">
-                                <img
-                                    src={products[0].image}
-                                    alt={products[0].title}
+                <Tittle />
+                <CartBox>
+                    <Wrapper className={'cart__left-wrapper'}>
+                        <ListBox>
+                            {items.map((item) => (
+                                <Product
+                                    btnText={'Добавить'}
+                                    item={item}
+                                    key={item.id}
+                                    num={num}
+                                    onAddNum={handleAddNum}
                                 />
-                                <div className="list-box__text">
-                                    <h3>{products[0].title}</h3>
-                                    <p>{products[0].description}</p>
-                                </div>
-                                <div className="list-box__quantity">
-                                    <p>Количество:</p>
-                                    <span>{products[0].quantity}</span>
-                                </div>
-                                <span>{products[0].price}₽</span>
-                                <div className="list-box__increase">
-                                    <button className="list-box__btn-increase">
-                                        -
-                                    </button>
-                                    <input
-                                        type="number"
-                                        min="1"
-                                        max="100"
-                                        value="1"
-                                    />
-                                    <button className="list-box__btn-increase">
-                                        +
-                                    </button>
-                                </div>
-                                <button className="btn">Добавить</button>
-                            </li>
-                            <li className="list-box__items">
-                                <img
-                                    src={products[0].image}
-                                    alt={products[0].title}
+                            ))}
+                        </ListBox>
+                    </Wrapper>
+                    <Wrapper className={'cart__right-wrapper'}>
+                        <ListBox>
+                            {cart.map((item) => (
+                                <Product
+                                    btnText={'Убрать'}
+                                    item={item}
+                                    key={item.id}
                                 />
-                                <div className="list-box__text">
-                                    <h3>{products[0].title}</h3>
-                                    <p>{products[0].description}</p>
-                                </div>
-                                <div className="list-box__quantity">
-                                    <p>Количество:</p>
-                                    <span>{products[0].quantity}</span>
-                                </div>
-                                <span>{products[0].price}₽</span>
-                                <div className="list-box__increase">
-                                    <button className="list-box__btn-increase">
-                                        -
-                                    </button>
-                                    <input
-                                        type="number"
-                                        min="1"
-                                        max="100"
-                                        value="1"
-                                    />
-                                    <button className="list-box__btn-increase">
-                                        +
-                                    </button>
-                                </div>
-                                <button className="btn">Добавить</button>
-                            </li>
-                            <li className="list-box__items">
-                                <img
-                                    src={products[0].image}
-                                    alt={products[0].title}
-                                />
-                                <div className="list-box__text">
-                                    <h3>{products[0].title}</h3>
-                                    <p>{products[0].description}</p>
-                                </div>
-                                <div className="list-box__quantity">
-                                    <p>Количество:</p>
-                                    <span>{products[0].quantity}</span>
-                                </div>
-                                <span>{products[0].price}₽</span>
-                                <div className="list-box__increase">
-                                    <button className="list-box__btn-increase">
-                                        -
-                                    </button>
-                                    <input
-                                        type="number"
-                                        min="1"
-                                        max="100"
-                                        value="1"
-                                    />
-                                    <button className="list-box__btn-increase">
-                                        +
-                                    </button>
-                                </div>
-                                <button className="btn">Добавить</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="cart__right-wrapper wrapper">
-                        <ul className="cart__list list-box">
-                            <li className="list-box__items">
-                                <img
-                                    src={products[0].image}
-                                    alt={products[0].title}
-                                />
-                                <div className="list-box__text">
-                                    <h3>{products[0].title}</h3>
-                                    <p>{products[0].description}</p>
-                                </div>
-                                <div className="list-box__quantity">
-                                    <p>Количество:</p>
-                                    <span>{products[0].quantity}</span>
-                                </div>
-                                <span>{products[0].price}₽</span>
-                                <div className="list-box__increase">
-                                    <button className="list-box__btn-increase">
-                                        -
-                                    </button>
-                                    <input
-                                        type="number"
-                                        min="1"
-                                        max="100"
-                                        value="1"
-                                    />
-                                    <button className="list-box__btn-increase">
-                                        +
-                                    </button>
-                                </div>
-                                <button className="btn">Добавить</button>
-                            </li>
-                            <li className="list-box__items">
-                                <img
-                                    src={products[0].image}
-                                    alt={products[0].title}
-                                />
-                                <div className="list-box__text">
-                                    <h3>{products[0].title}</h3>
-                                    <p>{products[0].description}</p>
-                                </div>
-                                <div className="list-box__quantity">
-                                    <p>Количество:</p>
-                                    <span>{products[0].quantity}</span>
-                                </div>
-                                <span>{products[0].price}₽</span>
-                                <div className="list-box__increase">
-                                    <button className="list-box__btn-increase">
-                                        -
-                                    </button>
-                                    <input
-                                        type="number"
-                                        min="1"
-                                        max="100"
-                                        value="1"
-                                    />
-                                    <button className="list-box__btn-increase">
-                                        +
-                                    </button>
-                                </div>
-                                <button className="btn">Добавить</button>
-                            </li>
-                            <li className="list-box__items">
-                                <img
-                                    src={products[0].image}
-                                    alt={products[0].title}
-                                />
-                                <div className="list-box__text">
-                                    <h3>{products[0].title}</h3>
-                                    <p>{products[0].description}</p>
-                                </div>
-                                <div className="list-box__quantity">
-                                    <p>Количество:</p>
-                                    <span>{products[0].quantity}</span>
-                                </div>
-                                <span>{products[0].price}₽</span>
-                                <div className="list-box__increase">
-                                    <button className="list-box__btn-increase">
-                                        -
-                                    </button>
-                                    <input
-                                        type="number"
-                                        min="1"
-                                        max="100"
-                                        value="1"
-                                    />
-                                    <button className="list-box__btn-increase">
-                                        +
-                                    </button>
-                                </div>
-                                <button className="btn">Добавить</button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="total">
-                    <h3>Итого:</h3>
-                    <p>Количество:</p>
-                    <p>Общая сумма</p>
-                </div>
+                            ))}
+                        </ListBox>
+                    </Wrapper>
+                </CartBox>
+                <Total />
             </div>
         </div>
     );

@@ -6,6 +6,7 @@ const products = [
         price: 20,
         quantity: 200,
         image: 'https://api.dicebear.com/9.x/icons/svg?seed=Katherine',
+        num: 0,
     },
     {
         id: 2,
@@ -14,6 +15,7 @@ const products = [
         price: 50,
         quantity: 20,
         image: 'https://api.dicebear.com/9.x/icons/svg?seed=Amaya',
+        num: 0,
     },
     {
         id: 3,
@@ -22,6 +24,7 @@ const products = [
         price: 250,
         quantity: 10,
         image: 'https://api.dicebear.com/9.x/icons/svg?seed=Alexander',
+        num: 1,
     },
 ];
 
